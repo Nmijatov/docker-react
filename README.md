@@ -1,70 +1,115 @@
-# Getting Started with Create React App
+# Docker React Todo App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Moderna i funkcionalna Todo aplikacija izgrađena sa React-om i pokrenuta u Docker kontejneru.
 
-## Available Scripts
+## O projektu
 
-In the project directory, you can run:
+Ova aplikacija demonstrira:
+- React funkcionalnosti (useState, komponente, eventi)
+- Docker containerizaciju React aplikacije
+- Moderni UI dizajn sa gradient pozadinom
+- Responzivan dizajn za mobilne uređaje
+- CI/CD sa Travis CI i Azure Pipelines
 
-### `npm start`
+## Funkcionalnosti
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- ✅ Dodavanje novih zadataka
+- ✅ Označavanje zadataka kao završenih
+- ✅ Brisanje zadataka
+- ✅ Brojanje aktivnih i ukupnih zadataka
+- ✅ Moderni, responzivan dizajn
+- ✅ Animacije i hover efekti
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Docker komande
 
-### `npm test`
+### Development režim sa Docker Compose
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+docker-compose up
+```
 
-### `npm run build`
+Aplikacija će biti dostupna na [http://localhost:3000](http://localhost:3000)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Build production Docker image
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+docker build -t docker-react .
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Pokretanje production kontejnera
 
-### `npm run eject`
+```bash
+docker run -p 8080:80 docker-react
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Aplikacija će biti dostupna na [http://localhost:8080](http://localhost:8080)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Development build (za razvoj)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+docker build -f Dockerfile.dev -t docker-react-dev .
+docker run -p 3000:3000 -v $(pwd):/app docker-react-dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Lokalni development (bez Docker-a)
 
-## Learn More
+### Instalacija
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Pokretanje development servera
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Otvara aplikaciju na [http://localhost:3000](http://localhost:3000)
 
-### Analyzing the Bundle Size
+### Pokretanje testova
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm test
+```
 
-### Making a Progressive Web App
+### Production build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm run build
+```
 
-### Advanced Configuration
+## Struktura projekta
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+docker-react/
+├── src/
+│   ├── App.js          # Glavna Todo komponenta
+│   ├── App.css         # Stilovi za aplikaciju
+│   └── index.js        # Entry point
+├── public/             # Statički fajlovi
+├── Dockerfile          # Production Docker konfiguracija
+├── Dockerfile.dev      # Development Docker konfiguracija
+├── docker-compose.yml  # Docker Compose setup
+├── .travis.yml         # Travis CI konfiguracija
+└── azure-pipelines.yml # Azure Pipelines konfiguracija
 
-### Deployment
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Tehnologije
 
-### `npm run build` fails to minify
+- **React 17** - Frontend framework
+- **Docker** - Containerizacija
+- **Nginx** - Production web server
+- **Travis CI** - Continuous Integration
+- **Azure Pipelines** - CI/CD
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## CI/CD
+
+Projekat ima automatizovan CI/CD pipeline sa:
+- Travis CI za build i deployment
+- Azure Pipelines za integraciju
+
+## License
+
+Ovaj projekat je otvoren za korišćenje i modifikaciju.
